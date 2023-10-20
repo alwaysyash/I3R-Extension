@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+
+    "name": "I3R",
+    "description": "Inappropriate Image Identifier and Reporter",
+    "version": "1.0",
+
+    "icons": {
+      
+      "128": "logo.png"
+    },
+
+    "content_scripts": [
+        {
+          "matches": ["https://*/*", "http://*/*"],
+          "js": ["content-custom-area.js"],
+          "css": ["content-custom-area.css"]
+        }
+      ],
+
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "action": {
+        "default_icon": "logo.png",
+        "default_popup": "popup.html"
+    },
+
+    "permissions": ["activeTab", "tabs"]
+}

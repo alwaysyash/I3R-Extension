@@ -1,0 +1,59 @@
+body {
+  width: 200px;
+  height: 250px;
+  background-color: white;
+  margin: 0;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align elements to the left */
+  justify-content: flex-start; /* Align elements to the top */
+  height: 100%;
+
+}
+
+.extension-info {
+  display: flex;
+  align-items: center; /* Center vertically within the container */
+}
+
+.extension-logo {
+  width: 40px; /* Increase the width of the logo */
+  height: 40px;
+  margin-right: 10px; 
+  margin:10px/* Add some spacing between the logo and name */
+}
+
+.extension-name {
+  font-weight: bold;
+  color: rgb(75, 75, 75);
+  font-size: 20px;
+ 
+}
+
+#customArea {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px; 
+  border-radius: 5px;
+  margin:10px
+  
+}
+
+#customArea:hover {
+  background-color: rgb(109, 16, 16);
+}
+.colored-strip {
+  background-color: rgb(91, 160, 160);
+  color: white;
+  padding-left: 10px;
+  width: 100%; /* Span the entire width of the popup */
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+}

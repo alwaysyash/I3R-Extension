@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>I3R</title>
+  <link href="snapper-image.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="images/icon_old.png">
+</head>
+
+<body>
+  <div class="content_container">
+
+    <!-- Header -->
+    <div class="header_container">
+      <div class="header_bar">
+        <span id="header_text">I3R: Selection Review</span>
+      </div>
+
+      <!-- Header divider -->
+      <div class="header_divider"></div>
+
+      <!-- Screenshot utilities -->
+      <!-- <div class="utils_container">
+        <a class="utils_button" id="download_png" href="" download="">
+          .png<span class="button_icon">&nbsp;&#11123;</span>
+        </a>
+      </div>
+    </div> -->
+
+    <!-- Image Capture -->
+    <img src="" alt="I3R" id="capture_image">
+
+<!-- Form -->
+<form id="report_form">
+        <p>Select Reasons for Report:</p>
+        <label for="hate_speech">
+          <input type="checkbox" id="hate_speech" name="report_reason[]" value="Hate Speech"> Hate Speech
+        </label><br>
+        <label for="inappropriate_post">
+          <input type="checkbox" id="inappropriate_post" name="report_reason[]" value="Inappropriate post"> Inappropriate post
+        </label><br>
+        <label for="spam">
+          <input type="checkbox" id="spam" name="report_reason[]" value="Spam"> Spam
+        </label><br>
+      </form>
+
+
+      <button id="Report">Submit Report</button>
+  </div>
+ 
+  <script src="snapper-image.js"></script>
+</body>
+
+</html>
