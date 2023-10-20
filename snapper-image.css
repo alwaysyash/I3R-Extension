@@ -12,11 +12,13 @@ html, body {
 }
 
 .content_container {
-    margin: 20%;
+      margin-top: 5%;
+      margin-bottom: 10%;
+      margin-left: 20%;
+      margin-right: 20%;
       align-items: center;
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-bottom: 20px; 
+      
+      padding-bottom: 10vh; 
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
       background-color: white;
       border-radius: 20px; 
