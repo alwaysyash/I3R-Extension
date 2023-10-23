@@ -24,28 +24,67 @@
         <a class="utils_button" id="download_png" href="" download="">
           .png<span class="button_icon">&nbsp;&#11123;</span>
         </a>
-      </div>
-    </div> -->
+      </div> -->
 
+    </div>
+    
+    <div class="image-container">
     <!-- Image Capture -->
     <img src="" alt="I3R" id="capture_image">
+    </div>
+
 
 <!-- Form -->
+<div class="form-container">
 <form id="report_form">
         <p>Select Reasons for Report:</p>
         <label for="hate_speech">
-          <input type="checkbox" id="hate_speech" name="report_reason[]" value="Hate Speech"> Hate Speech
+          <input type="checkbox" id="hate_speech" name="report_reason" value="Hate Speech"> Hate Speech
         </label><br>
         <label for="inappropriate_post">
-          <input type="checkbox" id="inappropriate_post" name="report_reason[]" value="Inappropriate post"> Inappropriate post
+          <input type="checkbox" id="inappropriate_post" name="report_reason" value="Inappropriate post"> Inappropriate post
         </label><br>
         <label for="spam">
-          <input type="checkbox" id="spam" name="report_reason[]" value="Spam"> Spam
+          <input type="checkbox" id="spam" name="report_reason" value="Spam"> Spam
         </label><br>
-      </form>
+</form>
 
 
-      <button id="Report">Submit Report</button>
+<!-- Platform form -->
+<form id="platform_form">
+  <p>Select Platform:</p>
+  <label for="Twitter">
+    <input type="Radio" id="Twitter" name="report_platform" value="Twitter"> Twitter
+  </label><br>
+  <label for="Instagram">
+    <input type="radio" id="Instagram" name="report_platform" value="Instagram"> Instagram
+  </label><br>
+  <label for="Facebook">
+    <input type="radio" id="Facebook" name="report_platform" value="Facebook"> Facebook
+  </label><br>
+  <label for="Other">
+    <input type="radio" id="Other" name="report_platform" value="Other"> Other
+  </label>
+  <input type="text" id="custom_platform" name="custom_platform_value" placeholder="Specify Platform">
+  
+</form>
+</div>
+
+<!-- User ID -->
+<div class="form-container1">
+  <form id="user_form">
+    <div class="input-group">
+      <label for="user" style="color: rgb(80, 80, 80);
+      font-weight: bold; font-size: 16px;">Enter User ID:</label>
+      <input type="text" style=" width: 40%;"id="user" name="user" placeholder="@username">
+    </div>
+  </form>
+</div>
+<!-- button -->
+<div class="button-container">
+  <button id="Report">Submit Report</button>
+</div>
+      
   </div>
  
   <script src="snapper-image.js"></script>
