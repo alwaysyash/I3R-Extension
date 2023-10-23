@@ -31,6 +31,7 @@ for (var pair of formData.entries()) {
     combinedFormData.append(pair[0], pair[1]);
 }
 
+
 for (var pair of platformData.entries()) {
     combinedFormData.append(pair[0], pair[1]);
 }
