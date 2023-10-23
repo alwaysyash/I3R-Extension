@@ -23,6 +23,7 @@ def submit_report():
     print("Form Data:")
     print(json.dumps(form_data_dict, indent=4))
 
+    # Image decode and save
     base64_image_data = image
     base64_image_data = base64_image_data.split(',')[1] # Remove the 'data:image/png;base64,' prefix
     image_data = base64.b64decode(base64_image_data)
