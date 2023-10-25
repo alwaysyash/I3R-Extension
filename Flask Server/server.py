@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify,render_template
 import json
 import base64
-
 import firebase_admin 
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -17,7 +16,10 @@ def submit_report():
     report_tags=[]
     platforms=[]
     user=[]
-
+    timestamp=datetime.datetime.now()
+    timestamp_str = timestamp.strftime("%Y%m%d%H%M%S")#for name of image
+#===================================================================================================================================================================
+#Data Processing
     # Separate the form data from the image
     for key, value in form_data.items():
         if key == 'image':
@@ -43,12 +45,13 @@ def submit_report():
     base64_image_data = image
     base64_image_data = base64_image_data.split(',')[1] # Remove the 'data:image/png;base64,' prefix
     image_data = base64.b64decode(base64_image_data)
-    file_path = 'Flask Server\Images\image.png'
+    file_path = f'Flask Server/Images/image_{timestamp_str}.png'
     with open(file_path, 'wb') as image_file:
         image_file.write(image_data)
 
     print("Image saved successfully to", file_path)
 
+#===================================================================================================================================================================
 
 #Firebase Integration
     key={
@@ -69,7 +72,7 @@ def submit_report():
     print(default_app.name)
 
     db=firestore.client()
-    timestamp=datetime.datetime.now()
+    
     data={
         "DateTime": timestamp,
         "Tags":report_tags,
@@ -79,23 +82,45 @@ def submit_report():
 
     doc_ref = db.collection("I3R")
     doc_ref.add(data)
+#===================================================================================================================================================================
+#Image (corpus) Preprocess
 
-   # Respond with a JSON message (you can customize this response)
+
+
+
+
+
+
+
+#===================================================================================================================================================================
+#Run image through model
+
+
+
+
+
+
+#===================================================================================================================================================================
+#Match tags and Update the Database
+#Write code to autodelete images or storage issue. (can commne this later for presentation but needed)
+
+
+
+
+
+#===================================================================================================================================================================
+# Respond with a JSON message (you can customize this response)
     response = {"message": "Report received and processed"}
     return jsonify(response)
 
 
+#===================================================================================================================================================================
 
 if __name__ == '__main__':
     app.run(debug=True)
 
 
 
-
-
-#     # Process the form data and image as needed
-#     # You can access form fields like form_data['report_reason[]']
-#     # You can access the image using image.read() or save it to a file
 
 
 
