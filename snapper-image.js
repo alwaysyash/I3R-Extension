@@ -18,27 +18,28 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         };
 
         Report.addEventListener("click", function () {
+            alert('Confirm Report Submission!');
             // Capture the form data
             var formData = new FormData(report_form);
             var platformData= new FormData(platform_form);
             var userData=new FormData(user_form);
             
             //A new FormData object to combine the data
-var combinedFormData = new FormData();
+            var combinedFormData = new FormData();
 
-// Append the entries from each of the individual FormData objects
-for (var pair of formData.entries()) {
-    combinedFormData.append(pair[0], pair[1]);
-}
+            // Append the entries from each of the individual FormData objects
+            for (var pair of formData.entries()) {
+                combinedFormData.append(pair[0], pair[1]);
+            }
 
 
-for (var pair of platformData.entries()) {
-    combinedFormData.append(pair[0], pair[1]);
-}
+            for (var pair of platformData.entries()) {
+                combinedFormData.append(pair[0], pair[1]);
+            }
 
-for (var pair of userData.entries()) {
-    combinedFormData.append(pair[0], pair[1]);
-}
+            for (var pair of userData.entries()) {
+                combinedFormData.append(pair[0], pair[1]);
+            }
 
             combinedFormData.append("image",message.image); // Append the image data to the form
 
@@ -53,7 +54,7 @@ for (var pair of userData.entries()) {
                     console.log(data);
                 });
         });
-
+        
         sendResponse(JSON.stringify(message, null, 4) || true);
 
         return true;
