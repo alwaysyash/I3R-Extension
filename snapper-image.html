@@ -38,15 +38,20 @@
 <div class="form-container">
 <form id="report_form">
         <p>Select Reasons for Report:</p>
-        <label for="hate_speech">
-          <input type="checkbox" id="hate_speech" name="report_reason[1]" value="Hate Speech"> Hate Speech
+        <label for="offensive">
+          <input type="checkbox" id="offensive" name="report_reason[1]" value="Offensive"> Offensive
         </label><br>
         <label for="inappropriate_post">
           <input type="checkbox" id="inappropriate_post" name="report_reason[2]" value="Inappropriate post"> Inappropriate post
         </label><br>
-        <label for="spam">
-          <input type="checkbox" id="spam" name="report_reason[3]" value="Spam"> Spam
+        <label for="violent">
+          <input type="checkbox" id="violent" name="report_reason[3]" value="Violent"> Violent
         </label><br>
+        <label for="other">
+          <input type="checkbox" id="other" name="report_reason[4]" value="Other"> Other
+        </label>
+        
+        <br>
 </form>
 
 
@@ -75,7 +80,7 @@
   <form id="user_form">
     <div class="input-group">
       <label for="user" style="color: rgb(80, 80, 80);
-      font-weight: bold; font-size: 16px;">Enter User ID:</label>
+      font-weight: bold; font-size: 16px;">Enter Offender's User ID:</label>
       <input type="text" style=" width: 40%;"id="user" name="user" placeholder="@username">
     </div>
   </form>

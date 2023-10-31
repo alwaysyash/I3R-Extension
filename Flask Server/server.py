@@ -115,6 +115,7 @@ app = Flask(__name__)
 
 @app.route('/submit_report', methods=['GET','POST'])
 def submit_report():
+    flag="Appropriate"
     # Receive the form data and image from the Chrome extension
     form_data = request.form #can be used for database
     #for local operations
@@ -194,7 +195,7 @@ def submit_report():
     print(meaningful_text)
 
 
-    #===================================================================================================================================================================
+#===================================================================================================================================================================
     #Run image through model
 
     # Load model directly
@@ -224,6 +225,9 @@ def submit_report():
     # Print the predictions
     print(f"Predicted Class: {class_labels[predicted_labels]}")
     print(f"Predicted Probabilities: {predicted_probabilities}")
+
+    flag=class_labels[predicted_labels]
+
     
 #=====================================================================================================
 # Image Model
@@ -234,6 +238,10 @@ def submit_report():
     y = torch.argmax(y, dim=0) # label 1 corrosponds to inappropriate material
     print(y.tolist())
 
+    if y.tolist()==1:
+        img_flag= "Inappropriate"
+    else:
+        img_flag="Appropriate"
 
 #===================================================================================================================================================================
 #Match tags and Update the Database
@@ -247,7 +255,9 @@ def submit_report():
         "DateTime": timestamp,
         "Tags":report_tags,
         "Platform": platforms[0],
-        "User": user[0]
+        "User": user[0],
+        "Text Flag":flag,
+        "Image Flag":img_flag
     }
 
     doc_ref = db.collection("I3R")
