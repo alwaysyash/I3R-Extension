@@ -2,3 +2,4 @@ diagrams/
 screenshots/
 .vscode
 *.zip
+random_forest_model.pkl

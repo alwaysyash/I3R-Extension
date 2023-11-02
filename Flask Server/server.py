@@ -28,7 +28,37 @@ import PIL
 import pickle
 import clip
 
+import pickle
+from sklearn.ensemble import RandomForestClassifier
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import nltk
+#===============================================================================
+# Global Functional dependencies for text model
+
+#     data = pd.read_csv(r'Flask Server\Model Train\English YouTube Hate Speech Corpus\IMSyPP_EN_YouTube_comments_train.csv')
+#     data = data[['Text', 'Type']]
+#     data = data[data['Type'] != '0']
+
+#     data['Text'] = data['Text'].str.lower()
+#     data=data.dropna()
+
+#     # Split your dataset into training and testing sets
+#     X_train_initial = data['Text']
+
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
+
+    # Custom tokenizer function for stop words removal and lemmatization
+def custom_tokenizer(text):
+    words = nltk.word_tokenize(text)
+    words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
+    return words
+
 # ===========================================================
+# Global Functional dependencies for image model
+
+
 class ClipWrapper(torch.nn.Module):
     def __init__(self, device, model_name='ViT-L/14'):
         super(ClipWrapper, self).__init__()
@@ -92,6 +122,8 @@ def compute_embeddings(image_path):
     return clip(image).half()
 
 #===============================================================================
+# Global Functional dependencies for database
+
 key={
         "type": "service_account",
         "project_id": "i3r-extension",
@@ -111,7 +143,16 @@ print(default_app.name)
 
 db=firestore.client()
 
+
+
+#===============================================================================
+#===============================================================================
+#===============================================================================
+# Flask Server
+
+
 app = Flask(__name__)
+
 
 @app.route('/submit_report', methods=['GET','POST'])
 def submit_report():
@@ -124,6 +165,7 @@ def submit_report():
     user=[]
     timestamp=datetime.datetime.now()
     timestamp_str = timestamp.strftime("%Y%m%d%H%M%S")#for name of image
+
 #===================================================================================================================================================================
 #Data Processing
     # Separate the form data from the image
@@ -161,6 +203,7 @@ def submit_report():
 
 #===================================================================================================================================================================
 #Image (corpus) Preprocess
+
     pytesseract.pytesseract.tesseract_cmd = r'Flask Server\Tesseract\tesseract.exe'
     image_path = file_path # Provide the correct file path
 
@@ -198,35 +241,52 @@ def submit_report():
 #===================================================================================================================================================================
     #Run image through model
 
-    # Load model directly
-    tokenizer = AutoTokenizer.from_pretrained("IMSyPP/hate_speech_en")
-    model = AutoModelForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en")
+    # # Load model directly
+    # tokenizer = AutoTokenizer.from_pretrained("IMSyPP/hate_speech_en")
+    # model = AutoModelForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en")
 
-    # List of text samples you want to classify
-    text_samples = meaningful_text
+    # # List of text samples you want to classify
+    # text_samples = meaningful_text
 
-    # Tokenize the text samples and get model inputs
-    inputs = tokenizer(text_samples, padding=True, truncation=True, return_tensors="pt")
+    # # Tokenize the text samples and get model inputs
+    # inputs = tokenizer(text_samples, padding=True, truncation=True, return_tensors="pt")
 
-    # Forward pass through the model
-    with torch.no_grad():
-        outputs = model(**inputs)
+    # # Forward pass through the model
+    # with torch.no_grad():
+    #     outputs = model(**inputs)
 
-    # Get predicted probabilities for each class
-    logits = outputs.logits
-    predicted_probabilities = torch.softmax(logits, dim=1)
+    # # Get predicted probabilities for each class
+    # logits = outputs.logits
+    # predicted_probabilities = torch.softmax(logits, dim=1)
 
-    # Get the predicted class labels (class with the highest probability)
-    predicted_labels = torch.argmax(predicted_probabilities, dim=1)
+    # # Get the predicted class labels (class with the highest probability)
+    # predicted_labels = torch.argmax(predicted_probabilities, dim=1)
 
-    # Define class labels
-    class_labels = ["Acceptable", "Inappropriate", "Offensive", "Violent"]
+    # # Define class labels
+    # class_labels = ["Acceptable", "Inappropriate", "Offensive", "Violent"]
 
-    # Print the predictions
-    print(f"Predicted Class: {class_labels[predicted_labels]}")
-    print(f"Predicted Probabilities: {predicted_probabilities}")
+    # # Print the predictions
+    # print(f"Predicted Class: {class_labels[predicted_labels]}")
+    # print(f"Predicted Probabilities: {predicted_probabilities}")
 
-    flag=class_labels[predicted_labels]
+    # flag=class_labels[predicted_labels]
+
+
+# =======================================================================
+    # using pickle files for text model
+
+    with open(r'Flask Server\vectorizer.pkl', 'rb') as file:
+        vectorizer = pickle.load(file)
+
+    with open(r'Flask Server\random_forest_model.pkl', 'rb') as file:
+        loaded_model = pickle.load(file)
+    
+
+    new_text = [meaningful_text]
+    new_text_vectorized = vectorizer.transform(new_text)
+    predicted_label = loaded_model.predict(new_text_vectorized)
+    print("Predicted label:", predicted_label[0])
+    flag=predicted_label[0]
 
     
 #=====================================================================================================
@@ -236,17 +296,14 @@ def submit_report():
 
     y = classifier(x)
     y = torch.argmax(y, dim=0) # label 1 corrosponds to inappropriate material
-    print(y.tolist())
+    # print(y.tolist())
 
     if y.tolist()==1:
         img_flag= "Inappropriate"
     else:
         img_flag="Appropriate"
 
-#===================================================================================================================================================================
-#Match tags and Update the Database
-#Write code to autodelete images or storage issue. (can commne this later for presentation but needed)
-
+    print("Image Flag:",img_flag)
 
 #===================================================================================================================================================================
 
