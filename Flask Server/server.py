@@ -34,17 +34,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import nltk
 #===============================================================================
-# Global Functional dependencies for text model
 
-#     data = pd.read_csv(r'Flask Server\Model Train\English YouTube Hate Speech Corpus\IMSyPP_EN_YouTube_comments_train.csv')
-#     data = data[['Text', 'Type']]
-#     data = data[data['Type'] != '0']
-
-#     data['Text'] = data['Text'].str.lower()
-#     data=data.dropna()
-
-#     # Split your dataset into training and testing sets
-#     X_train_initial = data['Text']
 
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
@@ -124,19 +114,10 @@ def compute_embeddings(image_path):
 #===============================================================================
 # Global Functional dependencies for database
 
-key={
-        "type": "service_account",
-        "project_id": "i3r-extension",
-        "private_key_id": "462c8f6c7bc58880508571756c4408be6aa08658",
-        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC3jZkgXpf+Q1wk\nlWRHdTwyRWuJHSgwSRxygMN8ZRdMHaOz+CVnXXOrywmFDVngQBONWqD3gxEwY62O\nSWzzcGtsIbdTlX9hVXlyIi9cERFluwxBK5cQKHgXSeTO8uTBHkDslvVaDwrkrNSs\nL+R0PhQQcBEcIC98KM6Y5Jh9FHZSw4iXsFuFOqd6hzN+yUdtf5QOjktjQFrewAhR\nu62sXyUKwoWth89zYlvnICQ89ElxGC8nXzzjonFX41Q8mL/mATtrdsaPGd9B64fj\nKSX79bOEKbQFZNvBAFsOezTwLtqjsflGlhtK/AfviNqaPG0Synhe6CrV9W3sT5c/\nApe+cgFBAgMBAAECggEAAZb0GcvqmJI4RifWEGld7gMxu88DwKv4F1ob906VKFIE\nZNlevORaDVrq4vBbPtOHPSeTsnkRM8r/3zYtv6D8XoQfPJXUSSvulelhDB9+DVRp\n9iwyDiWE6WdjgtL8iLCh+CU+4ZAKSdyLqKRvNSjZec1NVKHxugCiI2sCvWiT4BfG\nKVa3tkF19AkDvRx96cmOHCieHlVi1sAP1b/ZiXyBoRLxiIfbMFPRqXnq26Wzy7kv\n8UtduvoK4yV5cLQtKKcVEmtMxLwk3NVmrJPxv25JH92Zm+3BS/2D5J0OAOgkzBvh\nuBTT2T8C9XlidLT56CzVIuEQcnCSIm3FlWTvIfh+zQKBgQDrY0zn92I2iwJLZJWg\nRTHqpCFzbvjdbgtmu3XFtMcli+61BDgXVO4NUZ5BUqjao+M7RVoRA/T0q2/lADTS\ndoIn7fwXRakYxBMUoywpJBnc/hEva7u5xEYrWZYLWq/IgctnSdL1eLwXNvNDDzl/\n+8jFXxa3ZS/hZoyKcFyIUK/YFQKBgQDHoFDJJmfGq/QdFGwYsT6Pkp1uK8EndOKF\n7vfvju8bwvnhD4VLHHVwd2cMpPVZL3cHlhtpSQ8o6+I8wJqQj9MXxjqXN0nKv7pg\nsRtl/Z4r7T50MxyImYv4ZZL70j6X8DTAiSndbzxG80oc25bjs0HoDP7lXNfISOoY\nuOp0gOhDfQKBgA/jvCVMhcy4xYbhW1heU2hLfBaWvyXzb8GXlfOqqGbYc1y01DR+\n/zLW95/hPJTFy2kM3W+YnMiHah5DTU2HwnF/lyza/vc1BTS3bxu33CcW34Ib+6gm\nn7X9biuGC6e1W021pg/7/nZytykntfH1xS/No3Lt2bWVfpc5zoVFLRmhAoGAJ+4c\nWq/w8B9zG+H64VGK1wMXtHLSFwddTDcJpwRrNZ1hiDAnlGej4hQwK6pPXUCOSZkv\n8HZpruDIByjrgeES8112WMr5WrHRIQgsF9GMMvMom+uhWH2GLvB6Xx6l4JRuqNiG\n5EEcyIBfobgWzYMMutLmpZBVpT1Yfgt28kjarK0CgYEAnGv1rVF8iUzIxUE/u2O6\nW1e6aUci/kYkmkRm3xqfQW1ZZ+G9rr5ogMBryYyX7PReqXqaqQ8pFlIt0eLwNamO\nd6vwil8XODorq4p/2kUCBuUZkuFOIZtv0nXKSOyDKjd2KkAmppEAmdnn9npJnch7\nxBZWWWUt1w0pK4iLYURuEdg=\n-----END PRIVATE KEY-----\n",
-        "client_email": "firebase-adminsdk-11h28@i3r-extension.iam.gserviceaccount.com",
-        "client_id": "114711825863426214473",
-        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "token_uri": "https://oauth2.googleapis.com/token",
-        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-11h28%40i3r-extension.iam.gserviceaccount.com",
-        "universe_domain": "googleapis.com"
-    }
+# key paste 
+
+
+
 cred=credentials.Certificate(key)
 default_app = firebase_admin.initialize_app(cred)
 print(default_app.name)
@@ -238,38 +219,7 @@ def submit_report():
     print(meaningful_text)
 
 
-#===================================================================================================================================================================
-    #Run image through model
 
-    # # Load model directly
-    # tokenizer = AutoTokenizer.from_pretrained("IMSyPP/hate_speech_en")
-    # model = AutoModelForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en")
-
-    # # List of text samples you want to classify
-    # text_samples = meaningful_text
-
-    # # Tokenize the text samples and get model inputs
-    # inputs = tokenizer(text_samples, padding=True, truncation=True, return_tensors="pt")
-
-    # # Forward pass through the model
-    # with torch.no_grad():
-    #     outputs = model(**inputs)
-
-    # # Get predicted probabilities for each class
-    # logits = outputs.logits
-    # predicted_probabilities = torch.softmax(logits, dim=1)
-
-    # # Get the predicted class labels (class with the highest probability)
-    # predicted_labels = torch.argmax(predicted_probabilities, dim=1)
-
-    # # Define class labels
-    # class_labels = ["Acceptable", "Inappropriate", "Offensive", "Violent"]
-
-    # # Print the predictions
-    # print(f"Predicted Class: {class_labels[predicted_labels]}")
-    # print(f"Predicted Probabilities: {predicted_probabilities}")
-
-    # flag=class_labels[predicted_labels]
 
 
 # =======================================================================
@@ -336,6 +286,48 @@ if __name__ == '__main__':
 
 
 
+# Global Functional dependencies for text model
+
+#     data = pd.read_csv(r'Flask Server\Model Train\English YouTube Hate Speech Corpus\IMSyPP_EN_YouTube_comments_train.csv')
+#     data = data[['Text', 'Type']]
+#     data = data[data['Type'] != '0']
+
+#     data['Text'] = data['Text'].str.lower()
+#     data=data.dropna()
+
+#     # Split your dataset into training and testing sets
+#     X_train_initial = data['Text']
 
 
+#===================================================================================================================================================================
+    #Run image through model
 
+    # # Load model directly
+    # tokenizer = AutoTokenizer.from_pretrained("IMSyPP/hate_speech_en")
+    # model = AutoModelForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en")
+
+    # # List of text samples you want to classify
+    # text_samples = meaningful_text
+
+    # # Tokenize the text samples and get model inputs
+    # inputs = tokenizer(text_samples, padding=True, truncation=True, return_tensors="pt")
+
+    # # Forward pass through the model
+    # with torch.no_grad():
+    #     outputs = model(**inputs)
+
+    # # Get predicted probabilities for each class
+    # logits = outputs.logits
+    # predicted_probabilities = torch.softmax(logits, dim=1)
+
+    # # Get the predicted class labels (class with the highest probability)
+    # predicted_labels = torch.argmax(predicted_probabilities, dim=1)
+
+    # # Define class labels
+    # class_labels = ["Acceptable", "Inappropriate", "Offensive", "Violent"]
+
+    # # Print the predictions
+    # print(f"Predicted Class: {class_labels[predicted_labels]}")
+    # print(f"Predicted Probabilities: {predicted_probabilities}")
+
+    # flag=class_labels[predicted_labels]
